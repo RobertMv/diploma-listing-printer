@@ -36,6 +36,9 @@ func main() {
 
 	// prepare full listing
 	printListing(outputDir, files)
+
+	fmt.Println("\n\nPress the Enter Key to exit")
+	fmt.Scanln()
 }
 
 func printDir(files []string) {
@@ -69,15 +72,12 @@ func printListing(outDirectory string, files []string) {
 
 			dirs := strings.Split(f.Name(), "\\")
 			writeLineInFile(writer, dirs[len(dirs)-1])
-			writeLineInFile(writer, "---------------------------")
 			// scan this source file
 			for scanner.Scan() {
 				// write its content to out file
 				writeLineInFile(writer, scanner.Text())
 			}
-			writeLineInFile(writer, "\n////////////////////////////////////////////////////////////"+
-				"\n////////////////////////////////////////////////////////////"+
-				"\n////////////////////////////////////////////////////////////\n\n")
+			writeLineInFile(writer, "\n\n")
 			err = f.Close()
 			if err != nil {
 				fmt.Printf("%s", err.Error())
